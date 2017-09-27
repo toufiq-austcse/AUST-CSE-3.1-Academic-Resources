@@ -1,0 +1,13 @@
+p {
+	color:green;
+	font-size:22px;
+	border: 10px dashed #ca13c6;
+	background-color: #08b4c0;
+	padding: 50px;
+	margin: 25px;
+}
+h2 {
+	color:red;
+	border: 5px dotted black;
+	padding: 10px;
+}

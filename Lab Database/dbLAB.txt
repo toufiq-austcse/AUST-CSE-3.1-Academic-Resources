@@ -1,0 +1,288 @@
+Microsoft Windows [Version 6.3.9600]
+(c) 2013 Microsoft Corporation. All rights reserved.
+
+C:\Users\Student>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+ERROR 2003 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.24 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| cdcol              |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| webauth            |
++--------------------+
+7 rows in set (0.06 sec)
+
+mysql> CREATE DATABASE university_database;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> show databases;
++---------------------+
+| Database            |
++---------------------+
+| information_schema  |
+| cdcol               |
+| mysql               |
+| performance_schema  |
+| phpmyadmin          |
+| test                |
+| university_database |
+| webauth             |
++---------------------+
+8 rows in set (0.00 sec)
+
+mysql> USE university_database
+Database changed
+mysql> CREATE TABLE student (
+    -> id char(12),
+    -> name varchar(30),
+    -> dept_name varchar(50),
+    -> tot_cred dec(5,2)
+    -> );
+Query OK, 0 rows affected (0.32 sec)
+
+mysql> SHOW TABLES;
++-------------------------------+
+| Tables_in_university_database |
++-------------------------------+
+| student                       |
++-------------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO student (
+    -> )
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near '' at
+line 2
+mysql> INSERT INTO student( id, name, dept_name, tot_cred)
+    -> VALUES ("14.02.04.069","Siam","CSE",162.00);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO student( id, name, dept_name, tot_cred)
+    -> VALUES ("15.01.04.146","Soumik","CSE",162.00);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO student VALUES ("14.02.04.069","A","CSE",162.00);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> DESCRIBE student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | char(12)     | YES  |     | NULL    |       |
+| name      | varchar(30)  | YES  |     | NULL    |       |
+| dept_name | varchar(50)  | YES  |     | NULL    |       |
+| tot_cred  | decimal(5,2) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT id,name,dept_name,tot_cred FROM student;
++--------------+--------+-----------+----------+
+| id           | name   | dept_name | tot_cred |
++--------------+--------+-----------+----------+
+| 14.02.04.069 | Siam   | CSE       |   162.00 |
+| 15.01.04.146 | Soumik | CSE       |   162.00 |
+| 14.02.04.069 | A      | CSE       |   162.00 |
++--------------+--------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student;
++--------------+--------+-----------+----------+
+| id           | name   | dept_name | tot_cred |
++--------------+--------+-----------+----------+
+| 14.02.04.069 | Siam   | CSE       |   162.00 |
+| 15.01.04.146 | Soumik | CSE       |   162.00 |
+| 14.02.04.069 | A      | CSE       |   162.00 |
++--------------+--------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE student ADD email_address varchar(20);
+Query OK, 0 rows affected (0.40 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE student;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| id            | char(12)     | YES  |     | NULL    |       |
+| name          | varchar(30)  | YES  |     | NULL    |       |
+| dept_name     | varchar(50)  | YES  |     | NULL    |       |
+| tot_cred      | decimal(5,2) | YES  |     | NULL    |       |
+| email_address | varchar(20)  | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT * FROM student;
++--------------+--------+-----------+----------+---------------+
+| id           | name   | dept_name | tot_cred | email_address |
++--------------+--------+-----------+----------+---------------+
+| 14.02.04.069 | Siam   | CSE       |   162.00 | NULL          |
+| 15.01.04.146 | Soumik | CSE       |   162.00 | NULL          |
+| 14.02.04.069 | A      | CSE       |   162.00 | NULL          |
++--------------+--------+-----------+----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE student DROP email_address;
+Query OK, 0 rows affected (0.42 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | char(12)     | YES  |     | NULL    |       |
+| name      | varchar(30)  | YES  |     | NULL    |       |
+| dept_name | varchar(50)  | YES  |     | NULL    |       |
+| tot_cred  | decimal(5,2) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> ALTER TABLE student MODIFY tot_cred dec(6,3);
+Query OK, 3 rows affected (0.49 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM student
+    -> ;
++--------------+--------+-----------+----------+
+| id           | name   | dept_name | tot_cred |
++--------------+--------+-----------+----------+
+| 14.02.04.069 | Siam   | CSE       |  162.000 |
+| 15.01.04.146 | Soumik | CSE       |  162.000 |
+| 14.02.04.069 | A      | CSE       |  162.000 |
++--------------+--------+-----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE department(
+    -> dept_name varchar(50) NOT NULL,
+    -> budget dec(7,2) NOT NULL,
+    -> CONSTRAINT pk_department PRIMARY KEY (dept_name)
+    -> );
+Query OK, 0 rows affected (0.19 sec)
+
+mysql> INSERT INTO department VALUES("CSE",45678.00);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO department VALUES("CSE",45678.00);
+ERROR 1062 (23000): Duplicate entry 'CSE' for key 'PRIMARY'
+mysql> DESCRIBE department
+    -> ;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| dept_name | varchar(50)  | NO   | PRI | NULL    |       |
+| budget    | decimal(7,2) | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> ALTER TABLE student MODIFY name varchar(30) NOT NULL;
+Query OK, 3 rows affected (0.45 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT pk_student PRIMARY KEY(id);
+ERROR 1062 (23000): Duplicate entry '14.02.04.069' for key 'PRIMARY'
+mysql> TRUNCATE student;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> DESCRIBE student
+    -> ;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | char(12)     | YES  |     | NULL    |       |
+| name      | varchar(30)  | NO   |     | NULL    |       |
+| dept_name | varchar(50)  | YES  |     | NULL    |       |
+| tot_cred  | decimal(6,3) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student;
+Empty set (0.00 sec)
+
+mysql> ALTER TABLE student MODIFY id char(12) NOT NULL;
+Query OK, 0 rows affected (0.45 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE student MODIFY dept_name varchar(50) NOT NULL;
+Query OK, 0 rows affected (0.42 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE student MODIFY tot_cred decimal(6,3) NOT NULL;
+Query OK, 0 rows affected (1.42 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT pk_student PRIMARY KEY(id);
+Query OK, 0 rows affected (0.34 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | char(12)     | NO   | PRI | NULL    |       |
+| name      | varchar(30)  | NO   |     | NULL    |       |
+| dept_name | varchar(50)  | NO   |     | NULL    |       |
+| tot_cred  | decimal(6,3) | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT fk_student FOREIGN KEY (dept_name)
+    -> REFRENCES department (dept_name);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'REFRE
+NCES department (dept_name)' at line 3
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT fk_student FOREIGN KEY(dept_name)
+    -> REFRENCES department(dept_name);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near 'REFRE
+NCES department(dept_name)' at line 3
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT department(dept_name)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MySQL server version for the right syntax to use near '(dept
+_name)' at line 2
+mysql> ALTER TABLE student ADD
+    -> CONSTRAINT fk_student FOREIGN KEY(dept_name)
+    -> REFERENCES department(dept_name);
+Query OK, 0 rows affected (0.47 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| id        | char(12)     | NO   | PRI | NULL    |       |
+| name      | varchar(30)  | NO   |     | NULL    |       |
+| dept_name | varchar(50)  | NO   | MUL | NULL    |       |
+| tot_cred  | decimal(6,3) | NO   |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>2:28 AM 03-May-17
